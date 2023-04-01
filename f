@@ -45,8 +45,9 @@ function clean() {
   for (var i = 0; i < ic.length; i++) {
  //恢复表格背景 搜索结果背景与字体颜色
   cells[ic[i]].style.backgroundColor = "";
-  cells[ic[i]].querySelector ('h').style.backgroundColor = "";
-  cells[ic[i]].querySelector ('h').style.color = "#337ab7";
+  cells[i].innerHTML = cells[i].innerText;
+  //cells[ic[i]].querySelector ('h').style.backgroundColor = "";
+  //cells[ic[i]].querySelector ('h').style.color = "#337ab7";
    
  }
  
@@ -69,7 +70,7 @@ function tclean() {
 }
 
 
-
+//var tmp=[];
 
  document.addEventListener('keydown', (event) => {
  console.log(event.key);
@@ -85,7 +86,7 @@ function tclean() {
 
   
   if (event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
- 
+  clean();
     keyC.push(event.key);
    //
     console.log(keyC);
@@ -124,17 +125,20 @@ function tclean() {
   var cellText = cells[i].innerText.toLowerCase(); // 将单元格文本转换为小写字母
   if (cellText.indexOf(searchText) !== -1) {
    ic.push(i);
+  // tmp[i]=cells[i].innerHTML;
 //if(frist==0){ 
  //frist=1;cells[i].scrollIntoView({ block: "center" });
    //console.log("i");   
+  //有两种方法 1.每次搜索完成写入<h> 2.加载页面完成后全部写入<h>
   cells[i].innerHTML ='<h>'+ cells[i].innerHTML+'</h>' ;//增加<h>以便设置搜索结果样式
   cells[i].style.backgroundColor = "#ffebb5";//浅黄
    
 
    }
+  
  }
 }
-
+ if(ic.length!=0){
   search=1;    //完成搜索标记
 
   tid1=setTimeout(function() {''
@@ -151,20 +155,21 @@ function tclean() {
   var cells = table.getElementsByTagName("td");
 
    if(slot>0){
+    //将上一个标记清除
+  
   cells[ic[slot-1]].querySelector ('h').style.backgroundColor = "";
   cells[ic[slot-1]].querySelector ('h').style.color = "#337ab7";//浅蓝
    //cells[ic[slot-1]].style.backgroundColor = ""; 
   // cells[ic[slot-1]].style.textDecoration = "none";
   }else{ 
-  cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
-  cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
+  //cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
+  //cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
     //cells[ic[slot]].style.backgroundColor = "";
    //cells[ic[slot]].style.textDecoration = "none";
    }
-  if(slot==ic.length){    
-     slot=0;
-  } 
 
+  if(slot==ic.length){    
+     slot=0;  } 
   cells[ic[slot]].querySelector ('h').style.backgroundColor = "#1E90FF";//搜索结果背景
   cells[ic[slot]].querySelector ('h').style.color = "white";//搜索结果字体颜色
   cells[ic[slot]].scrollIntoView({ block: "center" });
@@ -172,9 +177,12 @@ function tclean() {
   //cells[ic[slot]].style.color = "black";
   //cells[ic[slot]].style.fontWeight = "bold";
   //cells[ic[slot]].style.textDecoration = "underline";
- 
+
+  slot++; 
   
-  slot++;
+
+   
+ }
     
  }
 
@@ -209,7 +217,7 @@ if(sessionStorage.getItem("flag")!="1"){
 
 //console.log(window.location.href);
 }
- 
+  
 
  
 });
