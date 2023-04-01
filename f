@@ -1,0 +1,425 @@
+
+if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
+{
+  console.log("start");
+  box = document.createElement('tbox');
+  box.id = 'tboxid';
+  document.documentElement.appendChild(box);
+  box.innerHTML = "";
+  box.style.position= "fixed";
+  box.style.top = "0";
+//box.style.left = "0";
+  box.style.right= "0";
+  box.style.width= "390px";
+  //box.style.border= 3px solid #73AD21;
+  box.style.zIndex = "9999";
+  box.style['top'] = '';
+  box.style.display = 'block';
+  box.style.fontSize = '18px';
+//box.style['background-color'] = "#fff";
+document.getElementById(box.id).style.color = "white";
+  //document.getElementById(box.id).style.color = "block";
+
+ var ic=[];
+ var keyC=[];
+ var tout=0;
+ var search=0,slot=0;;
+ var tid,tid1;
+
+
+window.onload = (event) => {
+console.log('page is fully loaded');
+ 
+if(sessionStorage.getItem("flag")=="1"){
+
+cleano();
+}
+
+};
+
+
+function clean() {
+ 
+  var table = document.getElementById("OnMachine");
+  var cells = table.getElementsByTagName("td");
+  for (var i = 0; i < ic.length; i++) {
+ //恢复表格背景 搜索结果背景与字体颜色
+  cells[ic[i]].style.backgroundColor = "";
+  cells[ic[i]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[i]].querySelector ('h').style.color = "#337ab7";
+   
+ }
+ 
+  console.log("cleanSearch");
+  slot=0;
+  ic.length=0;
+  search=0;
+ 
+ //document.getElementById(box.id).innerHTML = "";
+
+  
+}
+
+function tclean() {
+ keyC.length = 0;
+
+ console.log("cleanflag");
+ document.getElementById(box.id).innerHTML = "";
+
+}
+
+
+
+
+ document.addEventListener('keydown', (event) => {
+ console.log(event.key);
+ console.log(event.keyCode);
+ console.log(keyC);
+
+ clearTimeout(tid);
+ clearTimeout(tid1);
+ tid=setTimeout(function() {'' 
+  tclean();
+      },10 * 1000);
+
+
+  
+  if (event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
+ 
+    keyC.push(event.key);
+   //
+    console.log(keyC);
+    
+  
+    //document.getEl  keyC= String.fromCharCode(event.keyCode);ementById(box.id).style.display = 'block';
+   //document.getElementById(box.id).style.color = "blue";
+  // keyC= String.fromCharCode(keyC);
+   //console.log(keyC);
+    document.getElementById(box.id).innerHTML = keyC.join('');
+   
+  }
+ 
+  if(event.key=="Backspace"){
+   if(search==1){clean();}
+   keyC.pop();
+   document.getElementById(box.id).innerHTML = keyC.join('');
+
+   //if(keyC.join('')=="123")document.getElementById(box.id).style.color = "red";
+ // document.getElementById(box.id).style.display = 'none';
+
+   //keyC = "";
+   console.log(keyC);
+   
+  }
+//Enter
+  if(event.key=="Enter"){
+  //var frist=0;
+  if(keyC!=""&&search==0){
+  clean() ;
+   
+  var table = document.getElementById("OnMachine");
+  var searchText = keyC.join('').toLowerCase(); // 将搜索文本转换为小写字母
+  var cells = table.getElementsByTagName("td");
+  for (var i = 0; i < cells.length; i++) {
+  var cellText = cells[i].innerText.toLowerCase(); // 将单元格文本转换为小写字母
+  if (cellText.indexOf(searchText) !== -1) {
+   ic.push(i);
+//if(frist==0){ 
+ //frist=1;cells[i].scrollIntoView({ block: "center" });
+   //console.log("i");   
+  cells[i].innerHTML ='<h>'+ cells[i].innerHTML+'</h>' ;//增加<h>以便设置搜索结果样式
+  cells[i].style.backgroundColor = "#ffebb5";//浅黄
+   
+
+   }
+ }
+}
+
+  search=1;    //完成搜索标记
+
+  tid1=setTimeout(function() {''
+      clean();
+    },30 * 1000);
+   
+  console.log(search);
+  console.log(slot);
+  console.log(ic.length);
+
+
+  var table = document.getElementById("OnMachine");
+ 
+  var cells = table.getElementsByTagName("td");
+
+   if(slot>0){
+  cells[ic[slot-1]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[slot-1]].querySelector ('h').style.color = "#337ab7";//浅蓝
+   //cells[ic[slot-1]].style.backgroundColor = ""; 
+  // cells[ic[slot-1]].style.textDecoration = "none";
+  }else{ 
+  cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
+    //cells[ic[slot]].style.backgroundColor = "";
+   //cells[ic[slot]].style.textDecoration = "none";
+   }
+  if(slot==ic.length){    
+     slot=0;
+  } 
+
+  cells[ic[slot]].querySelector ('h').style.backgroundColor = "#1E90FF";//搜索结果背景
+  cells[ic[slot]].querySelector ('h').style.color = "white";//搜索结果字体颜色
+  cells[ic[slot]].scrollIntoView({ block: "center" });
+  //cells[ic[slot]].style.fontSize= "12px";
+  //cells[ic[slot]].style.color = "black";
+  //cells[ic[slot]].style.fontWeight = "bold";
+  //cells[ic[slot]].style.textDecoration = "underline";
+ 
+  
+  slot++;
+    
+ }
+
+//是否只显示当前区
+ if(event.keyCode==36){
+if(sessionStorage.getItem("flag")!="1"){
+ sessionStorage.setItem("flag", "1");
+ console.log("flags1");
+ cleano();
+}else{ sessionStorage.setItem("flag", "0"); console.log("flag1");}
+
+
+ 
+
+
+/*
+ var table = document.getElementById("OnMachine");
+ var searchText = "14497".toLowerCase(); // 将搜索文本转换为小写字母
+ var cells = table.getElementsByTagName("td");
+ for (var i = 0; i < cells.length; i++) {
+ var cellText = cells[i].innerHTML.toLowerCase(); // 将单元格文本转换为小写字母
+ if (cellText.indexOf(searchText) !== -1) {
+    ic.push(i);
+   
+    document.getElementById(box.id).innerHTML = cells[i].innerHTML+'  '+cells[i+2].innerHTML+'  '+cells[i+3].innerHTML+'  '+cells[i+4].innerHTML+'<br>已完成'+(cells[i+2].innerHTML-cells[i+3].innerHTML)+'  剩余'+cells[i+3].innerHTML;
+    cells[i].style.backgroundColor = "#ffebb5";
+    cells[i].scrollIntoView({ block: "center" });
+   
+  }
+}  
+  */
+
+//console.log(window.location.href);
+}
+ 
+
+ 
+});
+
+
+ 
+function cleano() {
+ 
+let searchText = ["5t1", "5t2", "6t1", "6t2", "7t1", "7t5", "7t6"];
+
+
+ var table = document.getElementById("OnLine");
+ 
+ var cells = table.getElementsByTagName("tr");
+
+
+ for(var j=0;j<searchText.length;j++){
+
+ for (var i = 0; i < cells.length; i++) {
+ var cellText = cells[i].innerHTML.toLowerCase(); // 将单元格文本转换为小写字母
+ if (cellText.indexOf(searchText[j].toLowerCase()) !== -1) {// 将搜索文本转换为小写字母
+  
+  document.getElementById("OnLine").deleteRow(i);
+   i--;
+   
+  }
+ }
+}
+ var table = document.getElementById("OnMachine");
+ 
+ var cells = table.getElementsByTagName("tr");
+
+
+ for(var j=0;j<searchText.length;j++){
+
+ for (var i = 0; i < cells.length; i++) {
+ var cellText = cells[i].innerHTML.toLowerCase(); // 将单元格文本转换为小写字母
+ if (cellText.indexOf(searchText[j].toLowerCase()) !== -1) {// 将搜索文本转换为小写字母
+  
+  document.getElementById("OnMachine").deleteRow(i);
+   i--;
+   
+  }
+ }
+}
+ console.log("co");
+}
+ 
+
+}
+
+
+//perpetual data
+//R/W data
+//localStorage.setItem("myCat", "Tom");
+//const cat = localStorage.getItem("myCat");console.log(cat);
+
+//remove data
+//localStorage.removeItem("myCat");
+//localStorage.clear();
+
+
+//tmp data
+// Save data to sessionStorage
+//sessionStorage.setItem("key", "value");
+
+// Get saved data from sessionStorage
+//let data = sessionStorage.getItem("key");console.log(data);
+
+// Remove saved data from sessionStorage
+//sessionStorage.removeItem("key");
+
+// Remove all saved data from sessionStorage
+//sessionStorage.clear();
+
+
+
+
+//document.getElementById("OnMachine").deleteRow(1);
+//<>37 39
+/* //大到小排序
+ var a =["1","5","2","9","8"];
+ var max = 0; 
+ var d = a.length*a.length;
+ for(var j=0; j<d;j++){
+ for (var i = 1; i < a.length; i++) {
+ if(a[i-1]<a[i]){ d++; max=a[i]; a[i]=a[i-1]; a[i-1]=max;  console.log(a);} //else {}
+
+ } }
+*/
+/* //小到大排序
+ var a =["1","5","2","9","8"];
+ var max = 0; 
+ var d = a.length*a.length;
+ for(var j=0; j<d;j++){
+ for (var i = 1; i < a.length; i++) {
+ if(a[i-1]<a[i]){ d++; max=a[i]; a[i]=a[i-1]; a[i-1]=max;  console.log(a);} //else {}
+
+ } }
+*/
+
+
+
+
+//等待页面加载完成开始执行
+/*window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+
+
+document.getElementById("OnLine").deleteRow(1);
+ 
+});
+
+
+window.onload = (event) => {
+  console.log('page is fully loaded');
+};
+*/
+
+
+//document.getElementById("OnMachine").deleteRow(1);
+//<>37 39
+//字符串转整数
+//let myString = parseInt("384.75a");
+//console.log(myString);
+
+
+
+
+/*
+
+
+
+
+  遍历所有高亮元素，移除其高亮样式
+var highlightElements = document.getElementsByClassName("highlight");
+highlightElements.forEach(function(element) {
+  element.style.backgroundColor = "";
+});
+// 或
+for (var i = 0; i < highlightElements.length; i++) {
+  highlightElements[i].style.backgroundColor = "";
+}
+
+通过重置 CSS 类名来移除相应的高亮效果
+
+highlightElements.forEach(function(element) {
+  element.className = "reset-highlight";
+});
+
+
+
+
+//插入表格
+// Find a <table> element with id="myTable":
+var table = document.getElementById("OnLine");
+
+// Create an empty <tr> element and add it to the 1st position of the table:
+var row = table.insertRow(0);
+
+// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+var cell1 = row.insertCell(0);
+var cell2 = row.insertCell(1);
+var cell3 = row.insertCell(2);
+var cell4 = row.insertCell(3);
+var cell5 = row.insertCell(4);
+// Add some text to the new cells:
+cell1.innerHTML = "NEW CELL1";
+cell2.innerHTML = "NEW CELL2";
+
+
+
+*/
+
+
+
+/*
+
+
+
+const table = document.getElementById("OnMachine");
+//table.rows[2].cells[]; // 获取第四行数据
+
+const cellData = [];                                                  
+for (let i = 0; i < table.rows.length; i++) {console.log(i);
+  cellData.push(table.rows[2].cells[2].innerText);
+}
+console.log(cellData);                                               var a=[];
+ var max = []; 
+ var d = a.length*a.length;
+ for(var j=0; j<d;j++){
+ for (var i = 1; i < a.length; i++) {
+ if(a[i-1]<a[i]){ d++; max=a[i]; a[i]=a[i-1]; a[i-1]=max;  console.log(a);} //else {}
+
+ } }                                                                
+                                                         
+for (let i = 0; i < table.rows.length; i++) {console.log(i);
+  table.rows[2].cells[2].innerHTML='<span id=i>'+cellData[i]+'</span>';
+console.log( table.rows[2].cells[2].innerText);      }
+
+
+
+
+// 获取要添加 id 的 span 元素
+var span = document.querySelector('td span');
+
+// 设置 span 元素的 id 属性
+span.id = 'cell-span';
+
+
+//当前时间
+console.log(Date());
+*/
