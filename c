@@ -6,27 +6,45 @@ const a = [];
 const b = []; 
 const c = []; 
 const table1 = [];
- const Qty= []; 
+ const Qty1= []; 
+const Slot=0,Qty=3,Balance=4,Usage=5;
 for (let i = 1; i < table.rows.length; i++) {
+ //获取数量
+  a[i]=parseInt(table.rows[i].cells[Qty].innerText);
  
-  a[i]=parseInt(table.rows[i].cells[3].innerText);
 }
  var tabl = document.getElementById("OnLine");
  
 for (let i = 1; i < table.rows.length; i++) {
- 
-  b[i]=parseInt(table.rows[i].cells[5].innerText);
-if(a[i]/b[i]<250){ 
- 
+ //获取用量
+  b[i]=parseInt(table.rows[i].cells[Usage].innerText);
+ //如果发现一样的
+ if(table.rows[i-1].cells[Slot].innerText==table.rows[i].cells[Slot].innerText){
+ console.log("f");  
+  console.log(i);  
+  console.log(a[i-1]); 
+  console.log(a[i]); 
+ a[i]=a[i-1]+a[i];
+  a[i-1]=a[i];
+console.log(a[i]);  
+  }
+ console.log(a[i]); 
+ console.log(b[i]); 
+ //数量除用量等可完成量
+if((a[i]/b[i])<250){ 
+ console.log(a[i]/b[i]);  
 //数量不够的添加到表格
-if(table.rows[i-1].cells[0].innerText!=table.rows[i].cells[0].innerText){
-tabl.insertRow(-1).insertCell(0).innerText=table.rows[i].cells[0].innerText;
+ 
 
- c[i]=i; }
+ tabl.insertRow(-1).insertCell(Slot).innerText=table.rows[i].cells[Slot].innerText;
+
+ c[i]=i;
+
+
  
 }else{ 
 //计算已完成的数量 
-Qty[0]  = (parseInt(table.rows[i].cells[3].innerText)-parseInt(table.rows[i].cells[4].innerText))/parseInt(table.rows[i].cells[5].innerText);   }
+Qty1[0]  = (parseInt(table.rows[i].cells[Qty].innerText)-parseInt(table.rows[i].cells[Balance].innerText))/parseInt(table.rows[i].cells[Usage].innerText);   }
  
 }
 for (let i = 1; i < table.rows.length; i++) {
@@ -37,7 +55,7 @@ for (let i = 1; i < table.rows.length; i++) {
 console.log(a);   
 console.log(b);  
 console.log(c);   
-console.log(Qty[0]); 
+console.log("已完成"+Qty1[0]); 
  
  
  
