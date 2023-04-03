@@ -6,3 +6,16 @@
 不清标记bug
 去掉回车 直接出结果
 deepai
+
+在JavaScript中，可以通过location.reload()方法来实现网页刷新，该方法会重新加载当前页面。
+
+例如：
+
+```
+// 点击按钮触发刷新
+document.getElementById("refreshBtn").addEventListener("click", function(){
+   location.reload();
+});
+```
+
+这样，当用户点击按钮时，页面就会重新加载。
