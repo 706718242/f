@@ -1,5 +1,5 @@
 
-if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
+//if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
 {
   console.log("start");
   box = document.createElement('tbox');
@@ -8,10 +8,11 @@ if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Proje
   box.innerHTML = "";
   box.style.position= "fixed";
   box.style.zIndex = "9999";
- // box.style.top = "100";
-  //box.style.left = "0";
- // box.style.right= "200";
-  box.style.width= "390px";
+  box.style.top = "30px";
+  //box.style.left = "300px";
+  box.style.right= "500px";
+  box.style.width= "190px";
+
   //box.style.border= 3px solid #73AD21;
   
  // box.style['top'] = '';
@@ -86,10 +87,21 @@ function tclean() {
 
 
   
-  if (event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
-  clean();
-    keyC.push(event.key);
-   //
+  if (event.key=="Backspace"||event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
+  
+     if(event.key=="Backspace"){
+   if(search==1){clean();}
+   keyC.pop();
+   document.getElementById(box.id).innerHTML = keyC.join('');
+
+
+  }
+   
+   clean();
+   if(event.key!="Backspace"){ 
+    keyC.push(event.key);}
+ 
+  
     console.log(keyC);
     
   
@@ -98,23 +110,8 @@ function tclean() {
   // keyC= String.fromCharCode(keyC);
    //console.log(keyC);
     document.getElementById(box.id).innerHTML = keyC.join('');
-   
-  }
- 
-  if(event.key=="Backspace"){
-   if(search==1){clean();}
-   keyC.pop();
-   document.getElementById(box.id).innerHTML = keyC.join('');
 
-   //if(keyC.join('')=="123")document.getElementById(box.id).style.color = "red";
- // document.getElementById(box.id).style.display = 'none';
 
-   //keyC = "";
-   console.log(keyC);
-   
-  }
-//Enter
-  if(event.key=="Enter"){
    if(search==2){
   var itl=document.getElementById(inputtl);
      console.log(itl);
@@ -147,8 +144,13 @@ function tclean() {
    
 
    }
+
   
  }
+
+  cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
+   
 }
  if(ic.length!=0){
  
@@ -195,9 +197,59 @@ function tclean() {
 
    
  }
-    
+}
+if(event.key=="Enter"){
+ if(ic.length!=0){
+ 
+
+  tid1=setTimeout(function() {''
+      clean();
+    },30 * 1000);
+   
+  console.log(search);
+  console.log(slot);
+  console.log(ic.length);
+
+
+  var table = document.getElementById("OnMachine");
+ 
+  var cells = table.getElementsByTagName("td");
+
+   if(slot>0){
+    //将上一个标记清除
+  
+  cells[ic[slot-1]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[slot-1]].querySelector ('h').style.color = "#337ab7";//浅蓝
+   //cells[ic[slot-1]].style.backgroundColor = ""; 
+  // cells[ic[slot-1]].style.textDecoration = "none";
+  }else{ 
+  //cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
+  //cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
+    //cells[ic[slot]].style.backgroundColor = "";
+   //cells[ic[slot]].style.textDecoration = "none";
+   }
+
+  if(slot==ic.length){    
+     slot=0;  } 
+  cells[ic[slot]].querySelector ('h').style.backgroundColor = "#1E90FF";//搜索结果背景
+  cells[ic[slot]].querySelector ('h').style.color = "white";//搜索结果字体颜色
+  cells[ic[slot]].scrollIntoView({ block: "center" });
+  //cells[ic[slot]].style.fontSize= "12px";
+  //cells[ic[slot]].style.color = "black";
+  //cells[ic[slot]].style.fontWeight = "bold";
+  //cells[ic[slot]].style.textDecoration = "underline";
+
+  slot++; 
+  
+
+   
+ }
  }
 
+  
+
+
+  
 //是否只显示当前区
  if(event.keyCode==36){
 if(sessionStorage.getItem("flag")!="1"){
