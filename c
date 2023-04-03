@@ -7,19 +7,23 @@ const b = [];
 const c = []; 
 const table1 = [];
  const Qty1= []; 
-const Slot=0,Qty=3,Balance=4,Usage=5;
-for (let i = 1; i < table.rows.length; i++) {
+const 位置=0,数量=3,剩余=4,用量=5;
+ //行范围-3_+3
+ //设计预计算功能 网页刷新时间为5min 根据计算的消耗速度进行预计算 提高刷新率同时不增加服务器负担
+ //刷新后预计算的数量恢复为实际数量，再次进行预计算
+ //table.rows[3].cells[2].innerText=123;
+for (let 行 = 1; 行 < table.rows.length; 行++) {
  //获取数量
-  a[i]=parseInt(table.rows[i].cells[Qty].innerText);
+  a[行]=parseInt(table.rows[行].cells[数量].innerText);
  
 }
  var tabl = document.getElementById("OnLine");
  
 for (let i = 1; i < table.rows.length; i++) {
  //获取用量
-  b[i]=parseInt(table.rows[i].cells[Usage].innerText);
+  b[i]=parseInt(table.rows[i].cells[用量].innerText);
  //如果发现一样的
- if(table.rows[i-1].cells[Slot].innerText==table.rows[i].cells[Slot].innerText){
+ if(table.rows[i-1].cells[位置].innerText==table.rows[i].cells[位置].innerText){
  console.log("f");  
   console.log(i);  
   console.log(a[i-1]); 
@@ -36,7 +40,7 @@ if((a[i]/b[i])<250){
 //数量不够的添加到表格
  
 
- tabl.insertRow(-1).insertCell(Slot).innerText=table.rows[i].cells[Slot].innerText;
+ //tabl.insertRow(-1).insertCell(位置).innerText=table.rows[i].cells[Slot].innerText;
 
  c[i]=i;
 
@@ -44,7 +48,7 @@ if((a[i]/b[i])<250){
  
 }else{ 
 //计算已完成的数量 
-Qty1[0]  = (parseInt(table.rows[i].cells[Qty].innerText)-parseInt(table.rows[i].cells[Balance].innerText))/parseInt(table.rows[i].cells[Usage].innerText);   }
+Qty1[0]  = (parseInt(table.rows[i].cells[数量].innerText)-parseInt(table.rows[i].cells[剩余].innerText))/parseInt(table.rows[i].cells[用量].innerText);   }
  
 }
 for (let i = 1; i < table.rows.length; i++) {
@@ -62,7 +66,7 @@ console.log("已完成"+Qty1[0]);
  
  
  
- /*
+ 
  //大到小排序                                      
  var max = []; 
  var d = a.length*a.length;
