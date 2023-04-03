@@ -1,5 +1,6 @@
 window.onload = (event) => {
   console.log('co is fully loaded');
+ 
 setTimeout(function() {
 const table = document.getElementById("OnMachine");
 const a = []; 
@@ -8,7 +9,7 @@ const c = [];
 const table1 = [];
  const Qty1= []; 
 const 位置=0,数量=3,剩余=4,用量=5;
- //行范围-3_+3
+ //行范围-3_+3 使用二维数组时不用计算范围
  //设计预计算功能 网页刷新时间为5min 根据计算的消耗速度进行预计算 提高刷新率同时不增加服务器负担
  //刷新后预计算的数量恢复为实际数量，再次进行预计算
  //table.rows[3].cells[2].innerText=123;
@@ -60,11 +61,12 @@ console.log(a);
 console.log(b);  
 console.log(c);   
 console.log("已完成"+Qty1[0]); 
+ // document.getElementById("tboxid").innerHTML = "已完成"+Qty1[0];
  
+ tabl.insertRow(-1).insertCell(位置).innerText="已完成"+Qty1[0];
  
- 
- 
- 
+// document.getElementById("tboxid").innerHTML ='<input id="color_link" type="text" value="" size="5" />' ;
+// console.log(document.getElementById("color_link").value);  
  
  
  //大到小排序                                      
