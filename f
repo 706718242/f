@@ -7,13 +7,14 @@ if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Proje
   document.documentElement.appendChild(box);
   box.innerHTML = "";
   box.style.position= "fixed";
-  box.style.top = "0";
-//box.style.left = "0";
-  box.style.right= "0";
+  box.style.zIndex = "9999";
+ // box.style.top = "100";
+  //box.style.left = "0";
+ // box.style.right= "200";
   box.style.width= "390px";
   //box.style.border= 3px solid #73AD21;
-  box.style.zIndex = "9999";
-  box.style['top'] = '';
+  
+ // box.style['top'] = '';
   box.style.display = 'block';
   box.style.fontSize = '18px';
 //box.style['background-color'] = "#fff";
@@ -114,9 +115,20 @@ function tclean() {
   }
 //Enter
   if(event.key=="Enter"){
-  //var frist=0;
+   if(search==2){
+  var itl=document.getElementById(inputtl);
+     console.log(itl);
+   if (itl!="") {
+    sessionStorage.setItem("tl", itl);
+   }
+    search=0;
+   }
+
   if(keyC!=""&&search==0){
   clean() ;
+  if(keyC[0]=="t"&&keyC[1]=="l") { console.log(keyC);document.getElementById("OnLine").innerHTML ='<input id="inputtl" type="text" value="" size="5" />' ;search=2;}
+  else { search=1;    //完成搜索标记
+                                                                                                                                                                         }
    
   var table = document.getElementById("OnMachine");
   var searchText = keyC.join('').toLowerCase(); // 将搜索文本转换为小写字母
@@ -139,7 +151,7 @@ function tclean() {
  }
 }
  if(ic.length!=0){
-  search=1;    //完成搜索标记
+ 
 
   tid1=setTimeout(function() {''
       clean();
