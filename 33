@@ -62,3 +62,60 @@ getElementsByTagName()会从整个文档树中查找节点元素，而且是动�
 在实现列表、表格等组件时，可以使用分批次加载数据的方式，即在页面渲染完成后，每次只加载一部分数据，并通过事件等方式触发后续数据加载。这种方式可以减轻浏览器的负担，并提高用户体验。
 
 总之，在处理大量元素时，需要避免浪费性能和资源。以上提到的方法都是有效的优化方案，但具体实现应因情况而异。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 选中指定元素中的文本
+function selectText(element) {
+  var range, selection;
+  if (document.body.createTextRange) {
+    range = document.body.createTextRange();
+    range.moveToElementText(element);
+    range.select();
+  } else if (window.getSelection) {
+    selection = window.getSelection();
+    range = document.createRange();
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+}
+
+// 在页面加载完成后，将文本选择器添加到页面上
+window.addEventListener('load', function() {
+  var selector = document.createElement('div');
+  selector.style.display = 'none';
+  selector.style.position = 'absolute';
+  selector.style.border = '1px dashed #000';
+  selector.style.backgroundColor = '#eee';
+  selector.style.opacity = '0.5';
+  selector.style.zIndex = '9999';
+  document.body.appendChild(selector);
+
+  // 点击任意元素时，选择相应的文本
+  document.addEventListener('click', function(event) {
+    var target = event.target;
+    if (target.nodeType === 3) { // 选中文本节点
+      target = target.parentNode;
+    }
+    selectText(target);
+    // 在选中的元素周围显示选中效果
+    var rect = target.getBoundingClientRect();
+    selector.style.top = rect.top + 'px';
+    selector.style.left = rect.left + 'px';
+    selector.style.width = rect.width + 'px';
+    selector.style.height = rect.height + 'px';
+    selector.style.display = 'block';
+  }, false);
+});
