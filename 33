@@ -7,3 +7,27 @@
 去掉回车 直接出结果(可能卡顿)
 
 location.reload();
+
+
+插入排序
+function insertionSort(array) {
+  var len = array.length;
+  for (var i = 0; i < len; i++) {
+    var current = array[i];
+    var j = i - 1;
+    while (j >= 0 && array[j] > current) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = current;
+  }
+  return array;
+}
+
+
+程序运行时间
+console.time('test');
+for (var i = 0; i < 1000000; i++) {
+  // 在这里运行需要测量时间的程序代码
+}
+console.timeEnd('test');
