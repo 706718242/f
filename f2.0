@@ -2,7 +2,7 @@
 //if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
 {
  
-function block()) {
+function block() {
 
   console.log("start");
   box = document.createElement('tbox');
@@ -28,11 +28,11 @@ function block()) {
 
  
 }
-
-function () {
-
-
   box = document.createElement('tbox1');
+function ipl() {
+
+
+
   box.id = 'tbox1id';
   document.documentElement.appendChild(box);
   box.innerHTML = "";
@@ -66,7 +66,9 @@ console.log('page is fully loaded');
  
 if(sessionStorage.getItem("flag")=="1"){
 
-cleano();
+ cleano();
+ block();
+ g();
 }
 
 };
@@ -99,7 +101,7 @@ function tclean() {
  keyC.length = 0;
 
  console.log("cleanflag");
- document.getElementById(box.id).innerHTML = "";
+ box.innerHTML = "";
 
 }
 
@@ -117,14 +119,14 @@ function tclean() {
   tclean();
       },10 * 1000);
 
-
+if(sessionStorage.getItem("flag")=="1"||search==3 ){
   
   if (event.key=="Backspace"||event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
   
      if(event.key=="Backspace"){
    if(search==1){clean();}
    keyC.pop();
-   document.getElementById(box.id).innerHTML = keyC.join('');
+   box.innerHTML = keyC.join('');
 
 
   }
@@ -141,7 +143,7 @@ function tclean() {
    //document.getElementById(box.id).style.color = "blue";
   // keyC= String.fromCharCode(keyC);
    //console.log(keyC);
-    document.getElementById(box.id).innerHTML = keyC.join('');
+    box.innerHTML = keyC.join('');
 
 
    if(search==2){
@@ -173,6 +175,7 @@ function tclean() {
   //有两种方法 1.每次搜索完成写入<h> 2.加载页面完成后全部写入<h>
   cells[i].innerHTML ='<h>'+ cells[i].innerHTML+'</h>' ;//增加<h>以便设置搜索结果样式
   cells[i].style.backgroundColor = "#ffebb5";//浅黄
+    //cells[i].style.backgroundColor = "#fffff0";//浅黄
    
 
    }
@@ -278,7 +281,7 @@ if(event.key=="Enter"){
  }
  }
 
-  
+ }
 
 
   
@@ -291,7 +294,7 @@ if(sessionStorage.getItem("flag")!="1"){
 }else{ sessionStorage.setItem("flag", "0"); console.log("flag1");}
 
 
- 
+search=3;
 
 
 /*
@@ -315,6 +318,17 @@ if(sessionStorage.getItem("flag")!="1"){
 }
   
 
+ if(event.keyCode==32){
+
+g();
+  tid1=setTimeout(function() {''
+      box.innerHTML = "";
+    },30 * 1000);
+  
+}
+
+
+  
  
 });
 
@@ -526,12 +540,41 @@ span.id = 'cell-span';
 
 //当前时间
 console.log(Date());
+
+
+
+
+
+console.time('test');
+for (var i = 0; i < 1000000; i++) {
+  // 在这里运行需要测量时间的程序代码
+}
+console.timeEnd('test');
+
+
+
+插入排序
+function insertionSort(array) {
+  var len = array.length;
+  for (var i = 0; i < len; i++) {
+    var current = array[i];
+    var j = i - 1;
+    while (j >= 0 && array[j] > current) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = current;
+  }
+  return array;
+}
+
+
 */
 
 
-/*
 
-window.onload = (event) => {
+function g() {
+ 
   console.log('co is fully loaded');
  
 setTimeout(function() {
@@ -570,7 +613,7 @@ console.log(a[i]);
  console.log(a[i]); 
  console.log(b[i]); 
  //数量除用量等可完成量
-if((a[i]/b[i])<200){ 
+if((a[i]/b[i])<440){ 
  console.log(a[i]/b[i]);  
 //数量不够的添加到表格
  
@@ -595,9 +638,15 @@ console.log(a);
 console.log(b);  
 console.log(c);   
 console.log("已完成"+Qty1[0]); 
+ /*
+   box.innerHTML = "已完成"+Qty1[0];
+   tid1=setTimeout(function() {''
+      box.innerHTML = "";
+    },30 * 1000);
+ */
  // document.getElementById("tboxid").innerHTML = "已完成"+Qty1[0];
  
- tabl.insertRow(-1).insertCell(位置).innerText="已完成"+Qty1[0];
+ //tabl.insertRow(-1).insertCell(位置).innerText="已完成"+Qty1[0];
  
 // document.getElementById("tboxid").innerHTML ='<input id="color_link" type="text" value="" size="5" />' ;
 // console.log(document.getElementById("color_link").value);  
@@ -627,10 +676,9 @@ for (let i = 0; i < table.rows.length; i++) {
 console.log( table.rows[i].cells[3].innerText);      }
 
 */ 
-/*
+
 
 }, 100); 
 
 
 };
-*/
