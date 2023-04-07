@@ -581,41 +581,36 @@ console.log(a);
 
 
 
-const table = document.getElementById("OnMachine");let tds = table.getElementsByTagName("td");
-
-  console.time('test');
-let tdsLength = tds.length;for (let i = 1; i <  tds.length; i++) {
-
- console.log(tds[i].innerText);
-
-
-
-    
-
-}console.timeEnd('test');   
-
-
-
-
-
-
-
-
-
-
-const table = document.getElementById("OnMachine");                let tds = table.getElementsByTagName("td");
+const table = document.getElementById("OnMachine");            
+let tds = table.getElementsByTagName("td");
 let tdsLength = tds.length;  
-console.time('test');                                               var a=[]; var b=[];                                                                         for (let i = 1; i <  tds.length; i++) {
+                           
+var a=[]; var b=[];      
+console.time('test');      
+for (let i = 1; i <  tds.length; i++) {
 
  a[i]=tds[i].innerText;
     
-
-}console.timeEnd('test');     console.log(a);                             
-                                             for (let i = 3; i <  tdsLength;i=i+7 ) {
-
-console.log(a[i]+" "+a[i+2]);  break;
-
 }
+
+
+console.log(a);                             
+for (let i = 3; i <  tdsLength;i=i+7 ) {
+
+if(parseInt(a[i])/parseInt(a[i+2])>750){
+console.log(parseInt(a[i-3]));  //保存位置以此计算已完成的数量
+console.log(parseInt(a[i]));                                               
+console.log(parseInt(a[i+2]));  
+break;
+}
+}
+console.timeEnd('test');
+
+
+alert ();//提示
+confirm ();//确认
+prompt ();//输入
+
 */
 
 
