@@ -13,7 +13,7 @@ function block() {
   box.style.zIndex = "9999";
   box.style.top = "30px";
   //box.style.left = "300px";
-  box.style.right= "500px";
+  box.style.right= "320px";
   box.style.width= "190px";
 
   //box.style.border= 3px solid #73AD21;
@@ -134,7 +134,8 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    clean();
    if(event.key!="Backspace"){ 
     keyC.push(event.key);}
- 
+  if(event.keyCode==80){ 
+    keyC.pop();}
   
     console.log(keyC);
     
@@ -192,7 +193,7 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
 
   tid1=setTimeout(function() {''
       clean();
-    },30 * 1000);
+    },20 * 1000);
    
   console.log(search);
   console.log(slot);
@@ -239,7 +240,7 @@ if(event.key=="Enter"){
 
   tid1=setTimeout(function() {''
       clean();
-    },30 * 1000);
+    },20 * 1000);
    
   console.log(search);
   console.log(slot);
@@ -323,7 +324,7 @@ search=3;
 g();
   tid1=setTimeout(function() {''
       box.innerHTML = "";
-    },30 * 1000);
+    },10 * 1000);
   
 }
 
@@ -587,7 +588,7 @@ let tdsLength = tds.length;
                            
 var a=[]; var b=[];      
 console.time('test');      
-for (let i = 1; i <  tds.length; i++) {
+for (let i = 0; i <  tds.length; i++) {
 
  a[i]=tds[i].innerText;
     
@@ -598,7 +599,7 @@ console.log(a);
 for (let i = 3; i <  tdsLength;i=i+7 ) {
 
 if(parseInt(a[i])/parseInt(a[i+2])>750){
-console.log(parseInt(a[i-3]));  //保存位置以此计算已完成的数量
+console.log(a[i-3]);  //保存位置以此计算已完成的数量
 console.log(parseInt(a[i]));                                               
 console.log(parseInt(a[i+2]));  
 break;
@@ -610,6 +611,45 @@ console.timeEnd('test');
 alert ();//提示
 confirm ();//确认
 prompt ();//输入
+
+
+
+
+
+
+
+
+
+
+const table = document.getElementById("OnMachine");            
+let tds = table.getElementsByTagName("td");
+let tdsLength = tds.length;  
+                           
+var a=[]; var b=[];      
+console.time('test');      
+
+
+                        
+for (let i = 3; i <  tdsLength;i=i+7 ) {
+
+if(parseInt(tds[i].innerText)/parseInt(tds[i+2].innerText)>750){
+console.log(tds[i-3].innerText);  //保存位置以此计算已完成的数量
+console.log(parseInt(tds[i].innerText));                                               
+console.log(parseInt(tds[i+2].innerText));  
+break;
+}
+}
+console.timeEnd('test');
+
+
+
+数量-剩余/用量
+统计结果一样的
+
+
+对一样的进行标记
+下一个计算时跳过此标记
+
 
 */
 
@@ -684,14 +724,47 @@ for (let i = 1; i < table.rows.length; i++) {
 console.log(a);   
 console.log(b);  
 console.log(c);   
-console.log("已完成"+Qty1[0]); 
+
+
+
+
+
+         
+let tds = table.getElementsByTagName("td");
+let tdsLength = tds.length;  
+                           
+//var a=[]; var b=[];      
+console.time('test');      
+
+var q,bl,u;
+
+                        
+for (let i = 3; i <  tdsLength;i=i+7 ) {
+
+if(parseInt(tds[i].innerText)/parseInt(tds[i+2].innerText)>750){
+//console.log(tds[i-3].innerText);  //保存位置以此计算已完成的数量
+q=parseInt(tds[i].innerText);                                               
+bl=parseInt(tds[i+1].innerText);                                     
+ u=parseInt(tds[i+2].innerText);   
+ console.log(q);   
+console.log(bl);  
+console.log(u); 
+ console.log("已完成"+((q-bl)/u));       
+//break;
+}
+}
+console.timeEnd('test');
+
+
+
  /*
-   box.innerHTML = "已完成"+Qty1[0];
+ 
+   box.innerHTML = "已完成"+((q-bl)/u);
    tid1=setTimeout(function() {''
       box.innerHTML = "";
-    },30 * 1000);
+    },10 * 1000);
  */
- // document.getElementById("tboxid").innerHTML = "已完成"+Qty1[0];
+
  
  //tabl.insertRow(-1).insertCell(位置).innerText="已完成"+Qty1[0];
  
