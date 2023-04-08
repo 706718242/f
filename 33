@@ -3,8 +3,6 @@
 
 
 
-不清标记bug
-去掉回车 直接出结果(可能卡顿)
 
 location.reload();
 
