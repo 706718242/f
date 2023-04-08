@@ -119,3 +119,37 @@ window.addEventListener('load', function() {
     selector.style.display = 'block';
   }, false);
 });
+
+
+
+
+
+
+你可以使用JS中的数组遍历方法和对象来统计数组中一样的数据出现次数。以下是一个例子：
+
+```javascript
+let arr = [1, 2, 3, 2, 1, 2, 4];
+
+let count = {};
+
+arr.forEach(function(i) {
+    count[i] = (count[i] || 0) + 1;
+});
+
+for (let key in count) {
+    console.log(`${key}出现了${count[key]}次`);
+}
+```
+
+输出结果为：
+
+```
+1出现了2次
+2出现了3次
+3出现了1次
+4出现了1次
+```
+
+这里使用了forEach()方法来遍历数组，对于每个元素，都在对象`count`中创建一个对应的键，并将其值加一。如果该键在`count`中不存在，则给它赋初值0再加一。
+
+最后，用for...in循环遍历对象的每个键，输出每个键和对应的出现次数即可。
