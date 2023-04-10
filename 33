@@ -284,3 +284,31 @@ body {
 在上面的代码中，我们使用了`style`属性来定义了背景颜色为红色（使用CSS属性名`background-color`），所以这个`<div>`元素将会有红色背景。
 
 该方法更加简单和便捷，但如果需要定义多个样式，最好还是把它们放入一个CSS文件里。
+
+
+
+
+要在页面上方注入一个状态栏，您可以使用 JavaScript 创建元素并将其添加到页面顶部。以下是一些实现的示例代码：
+
+```javascript
+// 创建一个 header 元素用于放置状态栏内容
+const header = document.createElement('header');
+header.style.position = 'fixed'; // 设置为固定定位
+header.style.top = '0'; // 设置在页面顶部
+header.style.left = '0';
+header.style.height = '50px'; // 状态栏高度
+header.style.width = '100%'; // 宽度撑满整个页面
+header.style.backgroundColor = '#333'; // 背景颜色
+
+// 添加状态栏内容，这里我们添加一个简单的文本
+const textNode = document.createTextNode('这是一个状态栏！');
+header.appendChild(textNode);
+
+// 将 header 元素添加到 body 元素中
+const bodyEl = document.querySelector('body');
+bodyEl.insertBefore(header, bodyEl.firstChild);
+```
+
+上述代码将创建一个 `header` 元素，设置其样式及内容，然后将其添加到 `body` 元素中。您可以按照需要修改样式和内容以适应您的要求。
+
+希望这些信息能够帮到您！
