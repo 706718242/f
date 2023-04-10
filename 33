@@ -119,35 +119,62 @@ window.addEventListener('load', function() {
 });
 
 
+您可以使用 JavaScript 来将变量值显示在输入框中。假设您有一个输入框和一个变量 `myVariable`，则可以使用以下代码将该变量值显示在输入框中：
 
+HTML 代码：
 
+```html
+<input type="text" id="myInput">
+<button onclick="displayVariable()">显示变量</button>
+```
 
-
-你可以使用JS中的数组遍历方法和对象来统计数组中一样的数据出现次数。以下是一个例子：
+JavaScript 代码：
 
 ```javascript
-let arr = [1, 2, 3, 2, 1, 2, 4];
+var myVariable = "Hello World!"; // 假设这是您的变量
 
-let count = {};
-
-arr.forEach(function(i) {
-    count[i] = (count[i] || 0) + 1;
-});
-
-for (let key in count) {
-    console.log(`${key}出现了${count[key]}次`);
+function displayVariable() {
+  var input = document.getElementById("myInput"); // 获取输入框元素
+  input.value = myVariable; // 设置输入框的值为变量值
 }
 ```
 
-输出结果为：
+当用户点击“显示变量”按钮时，`displayVariable()` 函数会被调用，并将 `myVariable` 的值显示在输入框中。
 
+如果您希望在页面加载时自动将变量值显示在输入框中，可以在 JavaScript 文件中添加以下代码：
+
+```javascript
+window.onload = function() {
+  var input = document.getElementById("myInput"); // 获取输入框元素
+  input.value = myVariable; // 设置输入框的值为变量值
+}
 ```
-1出现了2次
-2出现了3次
-3出现了1次
-4出现了1次
+
+该代码会在页面加载后自动执行，并将 `myVariable` 的值显示在输入框中。
+
+
+
+
+要在web页面上创建一个圆角框，您可以使用CSS `border-radius` 属性来实现。该属性允许您将元素的边框角变为圆形。
+
+以下是一个简单的HTML和CSS示例，演示如何创建圆角矩形：
+
+```html
+<div class="rounded-box">
+  <p>这是一个圆角矩形！</p>
+</div>
 ```
 
-这里使用了forEach()方法来遍历数组，对于每个元素，都在对象`count`中创建一个对应的键，并将其值加一。如果该键在`count`中不存在，则给它赋初值0再加一。
+```css
+.rounded-box {
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 10px;
+}
+```
 
-最后，用for...in循环遍历对象的每个键，输出每个键和对应的出现次数即可。
+在这个例子里，我们用 `<div>` 元素包裹了一段文本内容。样式定义了这个 `<div>` 元素带有薄的灰色实线边框，并且使用 `border-radius` 属性来把边角变成了圆形。
+
+您可以根据需要修改此示例，以适应您的具体需求。例如，您可以更改使用的颜色、边框样式、填充等等。
+
+同时，注意到 `border-radius` 是 CSS3 引入支持的属性。如果您需要支持更古老的浏览器版本，则需要提供备用方案，如使用图片代替纯 CSS 实现等。
