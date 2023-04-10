@@ -178,3 +178,55 @@ window.onload = function() {
 您可以根据需要修改此示例，以适应您的具体需求。例如，您可以更改使用的颜色、边框样式、填充等等。
 
 同时，注意到 `border-radius` 是 CSS3 引入支持的属性。如果您需要支持更古老的浏览器版本，则需要提供备用方案，如使用图片代替纯 CSS 实现等。
+
+
+
+
+
+
+要在网页中注入本地的CSS文件，可以通过以下几个步骤：
+
+1. 在HTML文件中创建link元素，并将其href属性设置为指向本地CSS文件的路径。例如：`<link rel="stylesheet" type="text/css" href="/path/to/style.css">`
+2. 将link元素放置在HTML文件的head标签内。
+3. 保存并重新加载HTML文件，以便新的样式表能够生效。
+
+需要注意的是，在将网站部署到服务器上时，需要确保CSS文件能够正确地被上传到服务器中，并且链接路径设置正确。
+
+
+
+
+
+
+您可以使用以下方法在JavaScript中注入CSS文件：
+
+1. 使用document.createElement方法创建一个link元素，将其类型设置为"text/css"，href属性设置为CSS文件的URL。
+
+```
+var cssId = 'myCss';  // 设置CSS ID
+if (!document.getElementById(cssId)) {
+    var head = document.getElementsByTagName('head')[0];
+    var link = document.createElement('link');
+    link.id = cssId;
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = 'https://example.com/path/to/your.css';
+    head.appendChild(link);
+}
+```
+
+2. 使用document.write方法直接把style标签插入到HTML中。
+
+```
+document.write('<style type="text/css">@import url("https://example.com/path/to/your.css");</style>');
+```
+
+这些代码都可以在页面加载时执行，或者根据事件触发需要动态添加CSS文件。
+
+
+
+
+
+
+
+
+
