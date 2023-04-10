@@ -250,5 +250,37 @@ console.log(`Found ${matchCount} matches`);
 最后，当不再找到匹配项时，循环将停止并输出找到的匹配数量。
 
 
+要将注入的元素显示在最上方并将原有页面下移，您可以使用CSS中的position属性和z-index属性。
 
+首先，将注入的元素的position属性设置为fixed，并设置top和left等属性来确定其位置。然后，使用z-index属性将其堆叠顺序设置为比页面中其他元素更高。最后，根据您需要的距离，将原有页面下移相应的距离。
 
+以下是一个示例CSS代码：
+
+```
+#injected-element {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; /* 将其堆叠顺序设置为比页面中其他元素更高 */
+}
+
+body {
+   margin-top: 100px; /* 将原有页面下移100px */
+}
+```
+
+在上面的示例中，“#injected-element”是注入的元素的ID。通过将其position设置为fixed，并使用top和left等属性，可以让它相对于浏览器窗口显示在页面上方。然后，使用z-index属性将其堆叠顺序设置为比其他元素更高。
+
+最后，在body样式中，将margin-top设置为所需距离（此处为100px），以便将整个网页下移。这样，您就可以通过同时使用position和z-index属性来使注入元素显示在最上方，并在该元素下方显示原有内容。
+
+是的，您可以在HTML的`<div>`标签中使用`style`属性来直接定义背景颜色。以下是一个例子：
+
+```
+<div style="background-color: red;">
+  这是一个带红色背景的div元素。
+</div>
+```
+
+在上面的代码中，我们使用了`style`属性来定义了背景颜色为红色（使用CSS属性名`background-color`），所以这个`<div>`元素将会有红色背景。
+
+该方法更加简单和便捷，但如果需要定义多个样式，最好还是把它们放入一个CSS文件里。
