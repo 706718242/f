@@ -225,7 +225,29 @@ document.write('<style type="text/css">@import url("https://example.com/path/to/
 
 
 
+如果你需要查找多个匹配项，你可以使用一个循环来反复调用Window.find方法，直到找到所有的匹配项为止。在每次调用Window.find方法时，你需要向它传递两个参数：要查找的字符串和一些搜索选项。此外，你还需要指定`findNext`参数为`true`，以便让浏览器查找下一个匹配项。
 
+下面是一个示例代码片段，给出如何使用Window.find方法来查找多个匹配项：
+
+```
+const searchValue = "example"; // 搜索文本
+let matchCount = 0; // 匹配项计数
+let range; // 当前匹配项范围
+
+do {
+  range = window.find(searchValue, false, false, true, false, true, false);
+  if (range) {
+    matchCount++; // 增加匹配项计数
+    range.collapse(false); // 将光标移动到匹配项结束位置
+  }
+} while (range); // 反复循环直到找不到更多的匹配项
+
+console.log(`Found ${matchCount} matches`);
+```
+
+在这个例子中，我们首先定义了要搜索的字符串和一个变量来记录找到的匹配数量。然后我们开始一个“do...while”循环，在循环体内调用Window.find方法来查找下一个匹配项。如果找到了当前或下一个匹配项，则会增加“matchCount”的值并将光标移动到该匹配项的结束位置。
+
+最后，当不再找到匹配项时，循环将停止并输出找到的匹配数量。
 
 
 
