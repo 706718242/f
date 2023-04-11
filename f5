@@ -29,19 +29,29 @@ function block() {
  
 }
   box = document.createElement('tbox1');
+     var input = document.getElementById("keyv"); // 获取输入框元素
+
+
 function ipl() {
 
 
 
   box.id = 'tbox1id';
   document.documentElement.appendChild(box);
-  box.innerHTML = "";
+  box.innerHTML = '<div style="background-color:#FFFAFA" >'+
+        " 查找: "+
+       ' <input id="keyv" type="text" value="" size="18">'
+      +'</div>';
+  //box.style.border= "2px solid red";
+ // box.style.padding= "10px";
+ // box.style.borderradius= "25px";
+ 
   box.style.position= "fixed";
   box.style.zIndex = "9999";
-  box.style.top = "30px";
-  //box.style.left = "300px";
-  box.style.right= "500px";
-  box.style.width= "190px";
+  box.style.top = "0px";
+  box.style.left = "00px";
+  //box.style.right= "00px";
+ // box.style.width= "1000px";
 
   //box.style.border= 3px solid #73AD21;
   
@@ -49,9 +59,27 @@ function ipl() {
   box.style.display = 'block';
   box.style.fontSize = '18px';
 //box.style['background-color'] = "#fff";
-  document.getElementById(box.id).style.color = "white";
-  //document.getElementById(box.id).style.color = "block";
+  // document.getElementById(box.id).style.color = "white";
+ document.getElementById(box.id).style.color = "block";
+
+var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "30px";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "30px";
+
  
+ 
+ /*
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+   <div style="background-color:white; hight:120px">
+        Find: 
+        <input id="keyv" type="text" value="" size="12">
+      </div>         <div class="row">
+
+previous
+ Next
+ */
  
 }
  var ic=[];
@@ -60,19 +88,21 @@ function ipl() {
  var search=0,slot=0;;
  var tid,tid1;
 
-
+ 
 window.onload = (event) => {
 console.log('page is fully loaded');
  
 if(sessionStorage.getItem("flag")=="1"){
 
  cleano();
- block();
+ //block();
+ ipl();
+  keyv.focus();
+ // input.value = "123"; 
  g();
 }
 
 };
-
 
 function clean() {
  
@@ -101,7 +131,7 @@ function tclean() {
  keyC.length = 0;
 
  console.log("cleanflag");
- box.innerHTML = "";
+ keyv.value = "";
 
 }
 
@@ -126,8 +156,9 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
      if(event.key=="Backspace"){
    if(search==1){clean();}
    keyC.pop();
-   box.innerHTML = keyC.join('');
+  // box.innerHTML = keyC.join('');
 
+ 
 
   }
    
@@ -144,7 +175,7 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    //document.getElementById(box.id).style.color = "blue";
   // keyC= String.fromCharCode(keyC);
    //console.log(keyC);
-    box.innerHTML = keyC.join('');
+     keyv.value = keyC.join('');
 
 
    if(search==2){
@@ -323,7 +354,7 @@ search=3;
 
 g();
   tid1=setTimeout(function() {''
-      box.innerHTML = "";
+      keyv.value = ""; 
     },10 * 1000);
   
 }
@@ -737,11 +768,11 @@ let tdsLength = tds.length;
 console.time('test');      
 
 var q,bl,u;
-
+console.log("开始v计算");  
                         
 for (let i = 3; i <  tdsLength;i=i+7 ) {
 
-if(parseInt(tds[i].innerText)/parseInt(tds[i+2].innerText)>750){
+//if(parseInt(tds[i].innerText)/parseInt(tds[i+2].innerText)>750){
 //console.log(tds[i-3].innerText);  //保存位置以此计算已完成的数量
 q=parseInt(tds[i].innerText);                                               
 bl=parseInt(tds[i+1].innerText);                                     
@@ -751,7 +782,7 @@ console.log(bl);
 console.log(u); 
  console.log("已完成"+((q-bl)/u));       
 //break;
-}
+//}
 }
 console.timeEnd('test');
 
