@@ -311,4 +311,16 @@ bodyEl.insertBefore(header, bodyEl.firstChild);
 
 上述代码将创建一个 `header` 元素，设置其样式及内容，然后将其添加到 `body` 元素中。您可以按照需要修改样式和内容以适应您的要求。
 
-希望这些信息能够帮到您！
+禁用Ctrl+F可以通过阻止默认的键盘事件来实现。以下是一个实现示例：
+
+```javascript
+document.addEventListener('keydown', function(e) {
+  // 如果按下了Ctrl键和F键
+  if (e.ctrlKey && e.keyCode == '70') {
+    // 阻止默认的搜索操作
+    e.preventDefault();
+  }
+});
+```
+
+在这个示例中，我们监听整个文档的`keydown`事件，检测是否按下了Ctrl和F键，如果是，则阻止默认操作，从而禁用了搜索功能。注意，此方法并不能完全禁用搜索功能，因为用户仍然可以通过其他途径进行搜索。
