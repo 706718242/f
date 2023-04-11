@@ -39,7 +39,7 @@ function ipl() {
   box.id = 'tbox1id';
   document.documentElement.appendChild(box);
   box.innerHTML = '<div style="background-color:#FFFAFA" >'+
-        " 查找: "+
+        " Find: "+
        ' <input id="keyv" type="text" value="" size="18">'
       +'</div>';
   //box.style.border= "2px solid red";
@@ -63,7 +63,7 @@ function ipl() {
  document.getElementById(box.id).style.color = "block";
 
 var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "30px";
- var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "30px";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "35px";
 
  
  
@@ -145,6 +145,7 @@ function tclean() {
 
  clearTimeout(tid);
  clearTimeout(tid1);
+    keyv.focus();
  tid=setTimeout(function() {'' 
   tclean();
       },10 * 1000);
@@ -155,7 +156,7 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
   
      if(event.key=="Backspace"){
    if(search==1){clean();}
-   keyC.pop();
+   //keyC.pop();
   // box.innerHTML = keyC.join('');
 
  
@@ -164,9 +165,11 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    
    clean();
    if(event.key!="Backspace"){ 
-    keyC.push(event.key);}
+    //keyC.push(event.key);
+   }
   if(event.keyCode==80){ 
-    keyC.pop();}
+   // keyC.pop();
+  }
   
     console.log(keyC);
     
@@ -175,7 +178,7 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    //document.getElementById(box.id).style.color = "blue";
   // keyC= String.fromCharCode(keyC);
    //console.log(keyC);
-     keyv.value = keyC.join('');
+    // keyv.value = keyC.join('');
 
 
    if(search==2){
@@ -186,15 +189,15 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    }
     search=0;
    }
-
+ keyC=keyv.value;
   if(keyC!=""&&search==0){
   clean() ;
   if(keyC[0]=="t"&&keyC[1]=="l") { console.log(keyC);document.getElementById("OnLine").innerHTML ='<input id="inputtl" type="text" value="" size="5" />' ;search=2;}
   else { search=1;    //完成搜索标记
                                                                                                                                                                          }
-   
+  
   var table = document.getElementById("OnMachine");
-  var searchText = keyC.join('').toLowerCase(); // 将搜索文本转换为小写字母
+  var searchText = keyC.toLowerCase(); // 将搜索文本转换为小写字母
   var cells = table.getElementsByTagName("td");
   for (var i = 0; i < cells.length; i++) {
   var cellText = cells[i].innerText.toLowerCase(); // 将单元格文本转换为小写字母
