@@ -1,47 +1,44 @@
-
-//if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
+if(window.location.href=="http://172.30.11.197:8092/SMTMaterialConsumption?Project=Cisco&LineName=C23B") 
 {
  
-function block() {
+// 创建样式元素
+const style = document.createElement("style");
+style.textContent = `
+ 
+  .button {
+    background: transparent;
+    color: #aaa;
+    font-size: 16px;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+    
+  }
 
-  console.log("start");
-  box = document.createElement('tbox');
-  box.id = 'tboxid';
-  document.documentElement.appendChild(box);
-  box.innerHTML = "";
-  box.style.position= "fixed";
-  box.style.zIndex = "9999";
-  box.style.top = "30px";
-  //box.style.left = "300px";
-  box.style.right= "320px";
-  box.style.width= "190px";
-
-  //box.style.border= 3px solid #73AD21;
   
- // box.style['top'] = '';
-  box.style.display = 'block';
-  box.style.fontSize = '18px';
-//box.style['background-color'] = "#fff";
-  document.getElementById(box.id).style.color = "white";
-  //document.getElementById(box.id).style.color = "block";
- 
+`;
+var head = document.getElementsByTagName('head')[0];
 
- 
-}
-  box = document.createElement('tbox1');
-     var input = document.getElementById("keyv"); // 获取输入框元素
+  
+var input = document.getElementById("keyv"); // 获取输入框元素
 
 
 function ipl() {
 
+box = document.createElement('div');
 
-
-  box.id = 'tbox1id';
+  box.id = 'inputid';
   document.documentElement.appendChild(box);
-  box.innerHTML = '<div style="background-color:#FFFAFA" >'+
-        " Find: "+
-       ' <input id="keyv" type="text" value="" size="18">'
-      +'</div>';
+  box.innerHTML = 
+        '&nbsp'+" Find: "+
+       ' <input id="keyv" type="text" value="" size="18" readonly><button id="close-button" class="button">X</button>'+'<h id="Fv"></h>'
+      ;
   //box.style.border= "2px solid red";
  // box.style.padding= "10px";
  // box.style.borderradius= "25px";
@@ -51,21 +48,29 @@ function ipl() {
   box.style.top = "0px";
   box.style.left = "00px";
   //box.style.right= "00px";
- // box.style.width= "1000px";
-
+  box.style.width= "100%";
+box.style.height= "28px";
   //box.style.border= 3px solid #73AD21;
   
  // box.style['top'] = '';
-  box.style.display = 'block';
-  box.style.fontSize = '18px';
+  box.style.display = 'none';
+  box.style.fontSize = '16px';
+
 //box.style['background-color'] = "#fff";
+  box.style.backgroundColor = "#F7F7F7";
   // document.getElementById(box.id).style.color = "white";
  document.getElementById(box.id).style.color = "block";
 
-var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "30px";
- var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "35px";
+//var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "28px";
+ //var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "28px";
 
- 
+ var closeButton = document.getElementById("close-button");
+closeButton.addEventListener("click", function() {
+      console.log('clk'); 
+ box.style.display = "none";
+ var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "";
+    });
  
  /*
 
@@ -87,23 +92,45 @@ previous
  var tout=0;
  var search=0,slot=0;;
  var tid,tid1;
+ var tdata=[];
 
- 
 window.onload = (event) => {
 console.log('page is fully loaded');
  
 if(sessionStorage.getItem("flag")=="1"){
 
- cleano();
+ cleano();}
  //block();
+ // 将样式元素添加到<head>标签中
+document.head.appendChild(style);
  ipl();
-  keyv.focus();
+ 
  // input.value = "123"; 
- g();
-}
+ //g();
+//
 
+
+
+
+  var table = document.getElementById("OnMachine");
+
+  var cells = table.getElementsByTagName("td");
+ 
+  for (var i = 0; i < cells.length; i++) {
+   tdata[i] = cells[i].innerText.toLowerCase(); // 将单元格文本转换为小写字母
+
+  
+ }
+
+
+ 
 };
 
+
+ 
+ 
+ 
+ 
 function clean() {
  
   var table = document.getElementById("OnMachine");
@@ -123,8 +150,7 @@ function clean() {
   search=0;
  
  //document.getElementById(box.id).innerHTML = "";
-
-  
+ 
 }
 
 function tclean() {
@@ -132,31 +158,44 @@ function tclean() {
 
  console.log("cleanflag");
  keyv.value = "";
-
+box.style.display = "none";
+ var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "";
+  
 }
 
 
 //var tmp=[];
 
  document.addEventListener('keydown', (event) => {
+   if (event.ctrlKey && event.keyCode == '70') {
+    // 阻止默认的搜索操作
+    event.preventDefault();
+    
+
+  }else{
+    box.style.display = '';
+    var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "28px";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "28px";
  console.log(event.key);
  console.log(event.keyCode);
  console.log(keyC);
 
  clearTimeout(tid);
  clearTimeout(tid1);
-    keyv.focus();
+  
  tid=setTimeout(function() {'' 
   tclean();
-      },10 * 1000);
-
-if(sessionStorage.getItem("flag")=="1"||search==3 ){
+      },30 * 1000);
+//sessionStorage.getItem("flag")=="1"||
+  search=3;
+if(search==3 ){
   
-  if (event.key=="Backspace"||event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
+  if (event.key=="Backspace"||event.keyCode!=36&&event.keyCode!=32&&event.keyCode>47&&event.keyCode<58||event.keyCode=="189"||event.keyCode>"64"&&event.keyCode<"91") { 
   
      if(event.key=="Backspace"){
    if(search==1){clean();}
-   //keyC.pop();
+   keyC.pop();
   // box.innerHTML = keyC.join('');
 
  
@@ -165,10 +204,10 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    
    clean();
    if(event.key!="Backspace"){ 
-    //keyC.push(event.key);
+    keyC.push(event.key);
    }
   if(event.keyCode==80){ 
-   // keyC.pop();
+    keyC.pop();
   }
   
     console.log(keyC);
@@ -177,8 +216,8 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
     //document.getEl  keyC= String.fromCharCode(event.keyCode);ementById(box.id).style.display = 'block';
    //document.getElementById(box.id).style.color = "blue";
   // keyC= String.fromCharCode(keyC);
-   //console.log(keyC);
-    // keyv.value = keyC.join('');
+   
+     keyv.value = keyC.join('');
 
 
    if(search==2){
@@ -189,45 +228,48 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
    }
     search=0;
    }
- keyC=keyv.value;
-  if(keyC!=""&&search==0){
+ 
+  if(keyC.length>2&&search==0){
   clean() ;
   if(keyC[0]=="t"&&keyC[1]=="l") { console.log(keyC);document.getElementById("OnLine").innerHTML ='<input id="inputtl" type="text" value="" size="5" />' ;search=2;}
   else { search=1;    //完成搜索标记
                                                                                                                                                                          }
-  
-  var table = document.getElementById("OnMachine");
-  var searchText = keyC.toLowerCase(); // 将搜索文本转换为小写字母
+    var table = document.getElementById("OnMachine");
+
   var cells = table.getElementsByTagName("td");
-  for (var i = 0; i < cells.length; i++) {
-  var cellText = cells[i].innerText.toLowerCase(); // 将单元格文本转换为小写字母
-  if (cellText.indexOf(searchText) !== -1) {
+
+  var searchText = keyC.join('').toLowerCase(); // 将搜索文本转换为小写字母
+ var si=0;
+   ic.length=0;
+  for (var i = 0; i < tdata.length; i++) {
+  si++;
+   
+   if (tdata[i].indexOf(searchText) !== -1) {
    ic.push(i);
   // tmp[i]=cells[i].innerHTML;
 //if(frist==0){ 
  //frist=1;cells[i].scrollIntoView({ block: "center" });
    //console.log("i");   
   //有两种方法 1.每次搜索完成写入<h> 2.加载页面完成后全部写入<h>
-  cells[i].innerHTML ='<h>'+ cells[i].innerHTML+'</h>' ;//增加<h>以便设置搜索结果样式
-  cells[i].style.backgroundColor = "#ffebb5";//浅黄
+//  cells[i].innerHTML ='<h>'+ cells[i].innerText+'</h>' ;//增加<h>以便设置搜索结果样式
+ // cells[i].style.backgroundColor = "#ffebb5";//浅黄
     //cells[i].style.backgroundColor = "#fffff0";//浅黄
    
 
    }
-
+if(si==3){si=0; i=i+4;}
   
  }
 
-  cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
-  cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
-   
 }
+   
  if(ic.length!=0){
- 
-
+ cells[ic[slot]].innerHTML ='<h>'+ cells[ic[slot]].innerText+'</h>' ;//增加<h>以便设置搜索结果样式
+ cells[ic[slot]].querySelector ('h').style.backgroundColor = "";
+  cells[ic[slot]].querySelector ('h').style.color = "#337ab7";
   tid1=setTimeout(function() {''
       clean();
-    },20 * 1000);
+    },30 * 1000);
    
   console.log(search);
   console.log(slot);
@@ -261,12 +303,14 @@ if(sessionStorage.getItem("flag")=="1"||search==3 ){
   //cells[ic[slot]].style.color = "black";
   //cells[ic[slot]].style.fontWeight = "bold";
   //cells[ic[slot]].style.textDecoration = "underline";
+if(ic.length>0)   document.getElementById("Fv").innerHTML=(slot+1)+'/'+ic.length;
 
   slot++; 
   
 
    
  }
+    else{  document.getElementById("Fv").innerHTML="None";  }
 }
 if(event.key=="Enter"){
  if(ic.length!=0){
@@ -274,7 +318,7 @@ if(event.key=="Enter"){
 
   tid1=setTimeout(function() {''
       clean();
-    },20 * 1000);
+    },30 * 1000);
    
   console.log(search);
   console.log(slot);
@@ -287,7 +331,7 @@ if(event.key=="Enter"){
 
    if(slot>0){
     //将上一个标记清除
-  
+ 
   cells[ic[slot-1]].querySelector ('h').style.backgroundColor = "";
   cells[ic[slot-1]].querySelector ('h').style.color = "#337ab7";//浅蓝
    //cells[ic[slot-1]].style.backgroundColor = ""; 
@@ -301,6 +345,7 @@ if(event.key=="Enter"){
 
   if(slot==ic.length){    
      slot=0;  } 
+   cells[ic[slot]].innerHTML ='<h>'+ cells[ic[slot]].innerText+'</h>' ;//增加<h>以便设置搜索结果样式
   cells[ic[slot]].querySelector ('h').style.backgroundColor = "#1E90FF";//搜索结果背景
   cells[ic[slot]].querySelector ('h').style.color = "white";//搜索结果字体颜色
   cells[ic[slot]].scrollIntoView({ block: "center" });
@@ -308,6 +353,7 @@ if(event.key=="Enter"){
   //cells[ic[slot]].style.color = "black";
   //cells[ic[slot]].style.fontWeight = "bold";
   //cells[ic[slot]].style.textDecoration = "underline";
+if(ic.length>0)   document.getElementById("Fv").innerHTML=(slot+1)+'/'+ic.length;
 
   slot++; 
   
@@ -319,14 +365,15 @@ if(event.key=="Enter"){
  }
 
 
+
   
 //是否只显示当前区
  if(event.keyCode==36){
 if(sessionStorage.getItem("flag")!="1"){
  sessionStorage.setItem("flag", "1");
- console.log("flags1");
+ alert ("只显示34区");
  cleano();
-}else{ sessionStorage.setItem("flag", "0"); console.log("flag1");}
+}else{ sessionStorage.setItem("flag", "0"); alert ("显示所有区");}
 
 
 search=3;
@@ -358,16 +405,23 @@ search=3;
 g();
   tid1=setTimeout(function() {''
       keyv.value = ""; 
-    },10 * 1000);
+    },30 * 1000);
   
 }
 
+if(event.keyCode==27){
+  box.style.display = 'none';
+    var i; i=document.getElementsByClassName("container-fluid"); i[0].querySelector ('div').style.marginTop = "";
+ var i; i=document.getElementsByTagName("body"); i[0].querySelector ('div').style.marginTop = "";
+}
+    
 
+   }
   
  
 });
 
-
+ 
  
 function cleano() {
  
@@ -390,7 +444,7 @@ let searchText = ["5t1", "5t2", "6t1", "6t2", "7t1", "7t5", "7t6"];
    
   }
  }
-}
+}/*
  var table = document.getElementById("OnMachine");
  
  var cells = table.getElementsByTagName("tr");
@@ -407,7 +461,7 @@ let searchText = ["5t1", "5t2", "6t1", "6t2", "7t1", "7t5", "7t6"];
    
   }
  }
-}
+}*/
  console.log("co");
 }
  
@@ -575,8 +629,8 @@ span.id = 'cell-span';
 
 //当前时间
 console.log(Date());
-
-
+//原本为每输入一次字符全部查找一次
+//从第一个字符搜索到的结果进行查找加速查找速度
 
 
 
@@ -648,6 +702,10 @@ prompt ();//输入
 
 
 
+//得到刷新时间
+
+document.querySelector ('div.col').innerText;
+
 
 
 
@@ -685,8 +743,11 @@ console.timeEnd('test');
 下一个计算时跳过此标记
 
 
-*/
+判断第一个是否为空 为空则从缓冲中搜索第一个匹配字符的都转移到新缓冲 第二个字符从新缓冲开始搜索
 
+
+*/
+/*
 
 
 function g() {
@@ -734,12 +795,12 @@ console.log(a[i]);
  console.log(a[i]); 
  console.log(b[i]); 
  //数量除用量等可完成量
-if((a[i]/b[i])<440){ 
+if((a[i]/b[i])<200){ 
  console.log(a[i]/b[i]);  
 //数量不够的添加到表格
  
 
- //tabl.insertRow(-1).insertCell(位置).innerText=table.rows[i].cells[Slot].innerText;
+ tabl.insertRow(-1).insertCell(位置).innerText=table.rows[i].cells[Slot].innerText;
 
  c[i]=i;
 
@@ -805,7 +866,7 @@ console.timeEnd('test');
 // document.getElementById("tboxid").innerHTML ='<input id="color_link" type="text" value="" size="5" />' ;
 // console.log(document.getElementById("color_link").value);  
  
-
+/*
  //大到小排序  20.760009765625ms
  //小到大12.301025390625 ms
  var max = []; 
@@ -846,16 +907,17 @@ function insertionSort(array) {
     array[j + 1] = current;
   }
   return array;
-}
+}*/
   /*                                                      
 for (let i = 0; i < table.rows.length; i++) {
   table.rows[i].cells[3].innerHTML='<span id=i>'+a[i]+'</span>';
 console.log( table.rows[i].cells[3].innerText);      }
 
-*/ 
+*/ /*
 
 
 }, 100); 
 
 
 };
+*/
